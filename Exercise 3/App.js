@@ -4,14 +4,14 @@ import { Accelerometer } from 'expo-sensors';
 import { Audio } from 'expo-av';
 
 export default function App() {
-    const [shakeType, setShakeType] = useState("");
+    const [shakeType, setShakeType] = useState(""); // State to determine shake type
     const [sound, setSound] = useState(null);
 
     useEffect(() => {
-        Accelerometer.setUpdateInterval(100);
+        Accelerometer.setUpdateInterval(100); // Update every 100ms
 
         const subscription = Accelerometer.addListener(({ x, y }) => {
-            const threshold = 1.2;
+            const threshold = 1.2; // Adjust sensitivity
 
             if (Math.abs(x) > threshold) {
                 setShakeType("WATER SHAKE");
@@ -30,7 +30,7 @@ export default function App() {
     async function playSound(type) {
 
             if (sound) {
-                await sound.unloadAsync();
+                await sound.unloadAsync(); // Unload previous sound
             }
 
             let soundFile;
